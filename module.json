@@ -5,6 +5,7 @@
   "authors": [
     {
       "name": "ReapersSoulmate",
+      "url": "https://github.com/martin1english",
       "flags": {}
     }
   ],
@@ -13,6 +14,9 @@
     "minimum": "13",
     "verified": "13"
   },
+  "url": "https://github.com/martin1english/journal-shortcuts",
+  "manifest": "https://github.com/martin1english/journal-shortcuts/releases/latest/download/module.json",
+  "download": "https://github.com/martin1english/journal-shortcuts/releases/download/v1.0.0/journal-shortcuts-v1.0.0.zip",
   "esmodules": [
     "modules/journal-shortcuts.mjs"
   ],
