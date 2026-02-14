@@ -15,20 +15,14 @@ Type these prefixes directly into a journal entry's text editor:
 | `@ActivateImage` | Show an image to all players | `@ActivateImage[JournalEntry.xxx.JournalEntryPage.yyy]{Show Map}` |
 | `@ActivatePage` | Show a journal page to all players | `@ActivatePage[JournalEntry.xxx.JournalEntryPage.yyy]{Read Note}` |
 
-All four follow the same pattern: `@Prefix[id]{Label}`
-
-## Installation
-
-Clone or download into your `FoundryVTT/Data/modules` directory, then enable "Journal Shortcuts" in `Game Settings > Manage Modules`.
-
 ## How to Use
 
 ### Step 1 — Get the ID
 
 Every link needs an ID inside the square brackets. The easiest way to get one:
 
-1. Open a journal entry in **edit mode**
-2. **Drag** the target (a scene, image page, or journal page) into the editor
+1. Open a journal.
+2. **Drag** the target (a scene or journal page) into the editor
 3. Foundry will insert something like `@UUID[Scene.abc123]{Scene Name}` or `@UUID[JournalEntry.xxx.JournalEntryPage.yyy]{Page Name}`
 
 ### Step 2 — Change the Prefix
@@ -42,48 +36,14 @@ Replace `@UUID` with the Journal Shortcuts prefix you want:
 | Show an image | `@ActivateImage` | Full UUID path — keep as-is (e.g. `JournalEntry.xxx.JournalEntryPage.yyy`) |
 | Show a page | `@ActivatePage` | Full UUID path — keep as-is (e.g. `JournalEntry.xxx.JournalEntryPage.yyy`) |
 
-You can also use a **scene name** instead of an ID for scene links: `@ActivateScene[Tavern]{Enter the Tavern}`
 
-### Step 3 — Save and Click
+### Step 3 — Save
 
 Save the journal entry. The text will render as a clickable link. Click it to trigger the action.
 
-### Examples
-
-```
-@ActivateScene[abc123]{Enter the Dungeon}
-@ActivateScene[Tavern]{Go to Tavern}
-@ViewScene[abc123]{Preview the Map}
-@ActivateImage[JournalEntry.xxx.JournalEntryPage.yyy]{Reveal the Painting}
-@ActivateImage|observer[JournalEntry.xxx.JournalEntryPage.yyy]{Show Handout}
-@ActivatePage[JournalEntry.xxx.JournalEntryPage.yyy]{Read the Letter}
-@ActivatePage|limited[JournalEntry.xxx.JournalEntryPage.yyy]{Glimpse the Tome}
-```
-
-## Link Details
-
-### @ActivateScene
-
-- **Click** — activates the scene and opens its journal notes (GM only)
-- **Ctrl+Click** — views the scene without activating it
-
-### @ViewScene
-
-- **Click** — views the scene and opens its journal notes (any user)
-
-### @ActivateImage
-
-- **Click** — shows the image to all connected players in a lightbox (GM only)
-- The target must be an **image page** inside a journal entry
-
-### @ActivatePage
-
-- **Click** — shows the journal page to all connected players (GM only)
-- Works with any page type: text, image, PDF, etc.
-
 ## Permission Flags
 
-`@ActivateImage` and `@ActivatePage` support an optional permission flag. Add it between the prefix and the opening bracket, separated by a `|`:
+`@ActivateImage` and `@ActivatePage` support an optional permission flag. Add it between the prefix and the opening bracket, separated by a `|`:  (Shift |)
 
 ```
 @ActivateImage|observer[uuid]{Label}
@@ -124,9 +84,4 @@ When enabled, non-GM users clicking `@ActivateScene` links will view the associa
 
 ## Compatibility
 
-- **Minimum:** Foundry VTT v13
 - **Verified:** Foundry VTT v13
-
-## Credits
-
-Scene activation functionality originally by [ReapersSoulmate](https://github.com/claypooj21/journals-like-a-script) (Journals Like a Script).
