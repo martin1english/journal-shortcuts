@@ -1,0 +1,63 @@
+/* ========================================
+   Journal Shortcuts - Link Styles
+   ======================================== */
+
+/* Base styles shared by all enricher links */
+a.js-activate-scene,
+a.js-view-scene,
+a.js-activate-image,
+a.js-activate-page {
+  background: #DDD;
+  color: #191813;
+  padding: 1px 4px;
+  border: 1px solid var(--color-border-dark-tertiary);
+  border-radius: 2px;
+  white-space: nowrap;
+  word-break: break-all;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Icon color inside links */
+a.js-activate-scene i,
+a.js-view-scene i,
+a.js-activate-image i,
+a.js-activate-page i {
+  color: var(--color-text-dark-inactive);
+}
+
+/* Distinct background for image links */
+a.js-activate-image {
+  background: #D8E8D8;
+}
+
+/* Distinct background for page links */
+a.js-activate-page {
+  background: #D8D8E8;
+}
+
+/* Broken link styling */
+a.js-activate-scene.broken,
+a.js-view-scene.broken,
+a.js-activate-image.broken,
+a.js-activate-page.broken {
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px dashed red;
+  cursor: not-allowed;
+}
+
+/* Hover state */
+a.js-activate-scene:hover,
+a.js-view-scene:hover,
+a.js-activate-image:hover,
+a.js-activate-page:hover {
+  text-shadow: 0 0 4px var(--color-shadow-primary);
+}
+
+/* No hover effect on broken links */
+a.js-activate-scene.broken:hover,
+a.js-view-scene.broken:hover,
+a.js-activate-image.broken:hover,
+a.js-activate-page.broken:hover {
+  text-shadow: none;
+}

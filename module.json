@@ -1,29 +1,22 @@
 {
-  "id": "journals-like-a-script",
-  "title": "Journals Like A Script",
-  "description": "Create embedded links that activate or view a scene.",
+  "id": "journal-shortcuts",
+  "title": "Journal Shortcuts",
+  "description": "Embed links in journal entries that activate scenes, view scenes, or share journal page images with players.",
   "authors": [
     {
       "name": "ReapersSoulmate",
       "flags": {}
     }
   ],
-  "version": "2.1.1",
+  "version": "1.0.0",
   "compatibility": {
-    "minimum": "10",
-    "verified": "10.291"
+    "minimum": "13",
+    "verified": "13"
   },
   "esmodules": [
-    "modules/jlas.js"
+    "modules/journal-shortcuts.mjs"
   ],
   "styles": [
-    "styles/jlas.css"
-  ],
-  "url": "https://github.com/claypooj21/journals-like-a-script",
-  "manifest": "https://github.com/claypooj21/journals-like-a-script/releases/download/v2.1.1/module.json",
-  "download": "https://github.com/claypooj21/journals-like-a-script/releases/download/v2.1.1/module.zip",
-  "license": "https://github.com/claypooj21/journals-like-a-script/releases/download/v2.1.1/LICENSE",
-  "readme": "https://github.com/claypooj21/journals-like-a-script/releases/download/v2.1.1/README.md",
-  "changelog": "https://github.com/claypooj21/journals-like-a-script/releases/download/v2.1.1/changelog.md",
-  "bugs": "https://github.com/claypooj21/journals-like-a-script/issues"
+    "styles/journal-shortcuts.css"
+  ]
 }
