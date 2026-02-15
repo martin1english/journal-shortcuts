@@ -15,7 +15,7 @@
     "verified": "13"
   },
   "url": "https://github.com/martin1english/journal-shortcuts",
-  "manifest": "https://github.com/martin1english/journal-shortcuts/releases/latest/download/module.json",
+  "manifest": "https://raw.githubusercontent.com/martin1english/journal-shortcuts/main/module.json",
   "download": "https://github.com/martin1english/journal-shortcuts/releases/download/v1.0.0/journal-shortcuts-v1.0.0.zip",
   "esmodules": [
     "modules/journal-shortcuts.mjs"
