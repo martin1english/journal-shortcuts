@@ -47,31 +47,30 @@ Hooks.once("init", () => {
     default: false
   });
 
-  // --- Text Enrichers ---
+  // --- Text Enrichers (registered via concat to match Foundry expectations) ---
 
-  // @ActivateScene[sceneId]{Label}
-  CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`@(ActivateScene)\\[([^\\]]+)\\](?:\\{([^}]+)\\})?`, "g"),
-    enricher: enrichActivateScene
-  });
-
-  // @ViewScene[sceneId]{Label}
-  CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`@(ViewScene)\\[([^\\]]+)\\](?:\\{([^}]+)\\})?`, "g"),
-    enricher: enrichViewScene
-  });
-
-  // @ActivateImage[uuid]{Label} or @ActivateImage|permission[uuid]{Label}
-  CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`@ActivateImage(?:\\|([a-zA-Z]+))?\\[([^\\]]+)\\]\\{([^}]+)\\}`, "g"),
-    enricher: enrichActivateImage
-  });
-
-  // @ActivatePage[uuid]{Label} or @ActivatePage|permission[uuid]{Label}
-  CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`@ActivatePage(?:\\|([a-zA-Z]+))?\\[([^\\]]+)\\]\\{([^}]+)\\}`, "g"),
-    enricher: enrichActivatePage
-  });
+  CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat([
+    {
+      // @ActivateScene[sceneId]{Label}
+      pattern: new RegExp(`@(ActivateScene)\\[([^\\]]+)\\](?:{([^}]+)})?`, "g"),
+      enricher: enrichActivateScene
+    },
+    {
+      // @ViewScene[sceneId]{Label}
+      pattern: new RegExp(`@(ViewScene)\\[([^\\]]+)\\](?:{([^}]+)})?`, "g"),
+      enricher: enrichViewScene
+    },
+    {
+      // @ActivateImage[uuid]{Label} or @ActivateImage|permission[uuid]{Label}
+      pattern: new RegExp(`@ActivateImage(?:\\|([a-zA-Z]+))?\\[([^\\]]+)\\]\\{([^}]+)\\}`, "g"),
+      enricher: enrichActivateImage
+    },
+    {
+      // @ActivatePage[uuid]{Label} or @ActivatePage|permission[uuid]{Label}
+      pattern: new RegExp(`@ActivatePage(?:\\|([a-zA-Z]+))?\\[([^\\]]+)\\]\\{([^}]+)\\}`, "g"),
+      enricher: enrichActivatePage
+    }
+  ]);
 
   // --- Click Handlers ---
 

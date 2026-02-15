@@ -7,7 +7,7 @@ import { buildLink } from "../lib/utils.mjs";
  * match[2] = scene ID or name
  * match[3] = display label (optional)
  */
-export async function enrichViewScene(match, options) {
+export function enrichViewScene(match, options) {
   const target = match[2];
   const label = match[3];
 
