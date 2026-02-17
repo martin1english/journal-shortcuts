@@ -9,18 +9,19 @@
       "flags": {}
     }
   ],
-  "version": "1.0.0",
+  "version": "1.1.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
   },
   "url": "https://github.com/martin1english/journal-shortcuts",
   "manifest": "https://raw.githubusercontent.com/martin1english/journal-shortcuts/main/module.json",
-  "download": "https://github.com/martin1english/journal-shortcuts/releases/download/v1.0.0/journal-shortcuts-v1.0.0.zip",
+  "download": "https://github.com/martin1english/journal-shortcuts/releases/download/v1.1.0/journal-shortcuts-v1.1.0.zip",
   "esmodules": [
     "modules/journal-shortcuts.mjs"
   ],
   "styles": [
     "styles/journal-shortcuts.css"
-  ]
+  ],
+  "socket": true
 }

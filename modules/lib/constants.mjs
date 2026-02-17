@@ -5,6 +5,7 @@ export const CSS_CLASSES = {
   viewScene: "js-view-scene",
   activateImage: "js-activate-image",
   activatePage: "js-activate-page",
+  activateItem: "js-activate-item",
   broken: "broken"
 };
 

@@ -1,6 +1,6 @@
 # Journal Shortcuts
 
-Embed clickable action links in Foundry VTT journal entries that activate scenes, show images to players, display journal pages, and set permissions — all in a single click.
+Embed clickable action links in Foundry VTT journal entries that activate scenes, show images to players, display journal pages, share items, and set permissions — all in a single click.
 
 Journal Shortcuts is a spiritual successor to [Journals Like a Script](https://github.com/claypooj21/journals-like-a-script), modernised for Foundry VTT v13 with vanilla JavaScript and new features.
 
@@ -14,6 +14,7 @@ Type these prefixes directly into a journal entry's text editor:
 | `@ViewScene` | View a scene without activating | `@ViewScene[abc123]{Look at Tavern}` |
 | `@ActivateImage` | Show an image to all players | `@ActivateImage[JournalEntry.xxx.JournalEntryPage.yyy]{Show Map}` |
 | `@ActivatePage` | Show a journal page to all players | `@ActivatePage[JournalEntry.xxx.JournalEntryPage.yyy]{Read Note}` |
+| `@ActivateItem` | Show an item to all players | `@ActivateItem[Item.abc123]{Magic Sword}` |
 
 ## How to Use
 
@@ -22,8 +23,8 @@ Type these prefixes directly into a journal entry's text editor:
 Every link needs an ID inside the square brackets. The easiest way to get one:
 
 1. Open a journal.
-2. **Drag** the target (a scene or journal page) into the editor
-3. Foundry will insert something like `@UUID[Scene.abc123]{Scene Name}` or `@UUID[JournalEntry.xxx.JournalEntryPage.yyy]{Page Name}`
+2. **Drag** the target (a scene, journal page, or item) into the editor
+3. Foundry will insert something like `@UUID[Scene.abc123]{Scene Name}`, `@UUID[JournalEntry.xxx.JournalEntryPage.yyy]{Page Name}`, or `@UUID[Item.abc123]{Item Name}`
 
 ### Step 2 — Change the Prefix
 
@@ -35,6 +36,7 @@ Replace `@UUID` with the Journal Shortcuts prefix you want:
 | View a scene | `@ViewScene` | Scene ID only — remove the `Scene.` prefix (e.g. `abc123`) |
 | Show an image | `@ActivateImage` | Full UUID path — keep as-is (e.g. `JournalEntry.xxx.JournalEntryPage.yyy`) |
 | Show a page | `@ActivatePage` | Full UUID path — keep as-is (e.g. `JournalEntry.xxx.JournalEntryPage.yyy`) |
+| Show an item | `@ActivateItem` | Full UUID path — keep as-is (e.g. `Item.abc123`) |
 
 
 ### Step 3 — Save
@@ -43,11 +45,12 @@ Save the journal entry. The text will render as a clickable link. Click it to tr
 
 ## Permission Flags
 
-`@ActivateImage` and `@ActivatePage` support an optional permission flag. Add it between the prefix and the opening bracket, separated by a `|`:  (Shift |)
+`@ActivateImage`, `@ActivatePage`, and `@ActivateItem` support an optional permission flag. Add it between the prefix and the opening bracket, separated by a `|`:  (Shift |)
 
 ```
 @ActivateImage|observer[uuid]{Label}
 @ActivatePage|limited[uuid]{Label}
+@ActivateItem|observer[uuid]{Label}
 ```
 
 | Flag | Effect |
@@ -57,7 +60,7 @@ Save the journal entry. The text will render as a clickable link. Click it to tr
 | `owner` | Players get full ownership |
 | `none` | No persistent access |
 
-If no flag is specified, no ownership changes are made. Permissions are set on the **JournalEntryPage only** — the GM must ensure the parent JournalEntry has at least Limited access for players to see its pages.
+If no flag is specified, no ownership changes are made. For journal pages, permissions are set on the **JournalEntryPage only** — the GM must ensure the parent JournalEntry has at least Limited access for players to see its pages. For items, permissions are set on the **Item document**.
 
 ## Configuration
 

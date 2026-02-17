@@ -6,7 +6,8 @@
 a.js-activate-scene,
 a.js-view-scene,
 a.js-activate-image,
-a.js-activate-page {
+a.js-activate-page,
+a.js-activate-item {
   background: #DDD;
   color: #191813;
   padding: 1px 4px;
@@ -22,7 +23,8 @@ a.js-activate-page {
 a.js-activate-scene i,
 a.js-view-scene i,
 a.js-activate-image i,
-a.js-activate-page i {
+a.js-activate-page i,
+a.js-activate-item i {
   color: var(--color-text-dark-inactive);
 }
 
@@ -36,11 +38,17 @@ a.js-activate-page {
   background: #D8D8E8;
 }
 
+/* Distinct background for item links */
+a.js-activate-item {
+  background: #E8E8D8;
+}
+
 /* Broken link styling */
 a.js-activate-scene.broken,
 a.js-view-scene.broken,
 a.js-activate-image.broken,
-a.js-activate-page.broken {
+a.js-activate-page.broken,
+a.js-activate-item.broken {
   background: rgba(255, 0, 0, 0.05);
   border: 1px dashed red;
   cursor: not-allowed;
@@ -50,7 +58,8 @@ a.js-activate-page.broken {
 a.js-activate-scene:hover,
 a.js-view-scene:hover,
 a.js-activate-image:hover,
-a.js-activate-page:hover {
+a.js-activate-page:hover,
+a.js-activate-item:hover {
   text-shadow: 0 0 4px var(--color-shadow-primary);
 }
 
@@ -58,6 +67,7 @@ a.js-activate-page:hover {
 a.js-activate-scene.broken:hover,
 a.js-view-scene.broken:hover,
 a.js-activate-image.broken:hover,
-a.js-activate-page.broken:hover {
+a.js-activate-page.broken:hover,
+a.js-activate-item.broken:hover {
   text-shadow: none;
 }
