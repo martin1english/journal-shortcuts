@@ -4,17 +4,23 @@ import { buildLink } from "../lib/utils.mjs";
 /**
  * Enricher for @ActivateScene[sceneId]{Label}
  * match[1] = "ActivateScene"
- * match[2] = scene ID or name
+ * match[2] = UUID path, scene ID, or scene name
  * match[3] = display label (optional)
  */
-export function enrichActivateScene(match, options) {
+export async function enrichActivateScene(match, options) {
   const target = match[2];
   const label = match[3];
 
-  const collection = game.collections.get("Scene");
-  const doc = /^[a-zA-Z0-9]{16}$/.test(target)
-    ? collection.get(target)
-    : collection.getName(target);
+  // Try fromUuid first (handles full UUID paths like "Scene.abc123"),
+  // then fall back to collection lookup by ID or name for backwards compat
+  let doc = null;
+  try { doc = await fromUuid(target); } catch (e) { /* not a valid UUID */ }
+  if (!doc) {
+    const collection = game.collections.get("Scene");
+    doc = /^[a-zA-Z0-9]{16}$/.test(target)
+      ? collection.get(target)
+      : collection.getName(target);
+  }
 
   if (!doc) {
     return buildLink({

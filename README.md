@@ -10,8 +10,8 @@ Type these prefixes directly into a journal entry's text editor:
 
 | Prefix | What It Does | Example |
 |--------|-------------|---------|
-| `@ActivateScene` | Activate a scene (GM) | `@ActivateScene[abc123]{Go to Tavern}` |
-| `@ViewScene` | View a scene without activating | `@ViewScene[abc123]{Look at Tavern}` |
+| `@ActivateScene` | Activate a scene (GM) | `@ActivateScene[Scene.abc123]{Go to Tavern}` |
+| `@ViewScene` | View a scene without activating | `@ViewScene[Scene.abc123]{Look at Tavern}` |
 | `@ActivateImage` | Show an image to all players | `@ActivateImage[JournalEntry.xxx.JournalEntryPage.yyy]{Show Map}` |
 | `@ActivatePage` | Show a journal page to all players | `@ActivatePage[JournalEntry.xxx.JournalEntryPage.yyy]{Read Note}` |
 | `@ActivateItem` | Show an item to all players | `@ActivateItem[Item.abc123]{Magic Sword}` |
@@ -30,27 +30,33 @@ Every link needs an ID inside the square brackets. The easiest way to get one:
 
 Replace `@UUID` with the Journal Shortcuts prefix you want:
 
-| You want to... | Change `@UUID` to | ID to use |
-|---------------|--------------------|-----------|
-| Activate a scene | `@ActivateScene` | Scene ID only — remove the `Scene.` prefix (e.g. `abc123`) |
-| View a scene | `@ViewScene` | Scene ID only — remove the `Scene.` prefix (e.g. `abc123`) |
-| Show an image | `@ActivateImage` | Full UUID path — keep as-is (e.g. `JournalEntry.xxx.JournalEntryPage.yyy`) |
-| Show a page | `@ActivatePage` | Full UUID path — keep as-is (e.g. `JournalEntry.xxx.JournalEntryPage.yyy`) |
-| Show an item | `@ActivateItem` | Full UUID path — keep as-is (e.g. `Item.abc123`) |
+| You want to... | Change `@UUID` to |
+|---------------|--------------------|
+| Activate a scene | `@ActivateScene` | 
+| Show an image | `@ActivateImage` | 
+| Show a page | `@ActivatePage` | 
+| Show an item | `@ActivateItem` |
+
+example
+@ActivateScene[Scene.8S8Gbw6ZmeGMNqLE]{El Profundo Ranch Exterior}
 
 
-### Step 3 — Save
+#### Permission Flags
 
-Save the journal entry. The text will render as a clickable link. Click it to trigger the action.
+`@ActivateImage`, `@ActivatePage`, and `@ActivateItem` support an optional permission flag. `|`:  (Shift |)
 
-## Permission Flags
-
-`@ActivateImage`, `@ActivatePage`, and `@ActivateItem` support an optional permission flag. Add it between the prefix and the opening bracket, separated by a `|`:  (Shift |)
+Add it between the prefix and the opening bracket. 
 
 ```
 @ActivateImage|observer[uuid]{Label}
 @ActivatePage|limited[uuid]{Label}
 @ActivateItem|observer[uuid]{Label}
+
+example
+@ActivateImage|owner[JournalEntry.ELzutTZxysaj508G.JournalEntryPage.ZE6HY7AK00vbX12n]{Dasheill Hammett}
+@ActivatePage|owner[JournalEntry.v0DGDWD6D9479f2B.JournalEntryPage.EeSF5aNuTNIIWW1X]{San Francisco in 1925}
+@ActivateItem|owner[Item.zrVJgoy1DyMNugiN]{Webley MK IV}
+
 ```
 
 | Flag | Effect |
@@ -61,6 +67,10 @@ Save the journal entry. The text will render as a clickable link. Click it to tr
 | `none` | No persistent access |
 
 If no flag is specified, no ownership changes are made. For journal pages, permissions are set on the **JournalEntryPage only** — the GM must ensure the parent JournalEntry has at least Limited access for players to see its pages. For items, permissions are set on the **Item document**.
+
+### Step 3 — Save
+
+Save the journal entry. The text will render as a clickable link. Click it to trigger the action.
 
 ## Configuration
 
