@@ -51,7 +51,9 @@ Add it between the prefix and the opening bracket.
 @ActivateImage|observer[uuid]{Label}
 @ActivatePage|limited[uuid]{Label}
 @ActivateItem|observer[uuid]{Label}
+```
 
+```
 example
 @ActivateImage|owner[JournalEntry.ELzutTZxysaj508G.JournalEntryPage.ZE6HY7AK00vbX12n]{Dasheill Hammett}
 @ActivatePage|owner[JournalEntry.v0DGDWD6D9479f2B.JournalEntryPage.EeSF5aNuTNIIWW1X]{San Francisco in 1925}
