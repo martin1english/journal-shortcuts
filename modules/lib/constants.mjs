@@ -6,6 +6,7 @@ export const CSS_CLASSES = {
   activateImage: "js-activate-image",
   activatePage: "js-activate-page",
   activateItem: "js-activate-item",
+  playPlaylist: "js-play-playlist",
   broken: "broken"
 };
 

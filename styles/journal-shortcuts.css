@@ -71,3 +71,24 @@ a.js-activate-page.broken:hover,
 a.js-activate-item.broken:hover {
   text-shadow: none;
 }
+
+/* Play-playlist links (amber-tinted, music icon) */
+a.js-play-playlist {
+  background: #F0E2D0;
+  color: #191813;
+  padding: 1px 4px;
+  border: 1px solid var(--color-border-dark-tertiary);
+  border-radius: 2px;
+  white-space: nowrap;
+  word-break: break-all;
+  cursor: pointer;
+  text-decoration: none;
+}
+a.js-play-playlist i { color: var(--color-text-dark-inactive); }
+a.js-play-playlist.broken {
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px dashed red;
+  cursor: not-allowed;
+}
+a.js-play-playlist:hover { text-shadow: 0 0 4px var(--color-shadow-primary); }
+a.js-play-playlist.broken:hover { text-shadow: none; }

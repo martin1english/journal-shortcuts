@@ -4,10 +4,12 @@ import { enrichViewScene } from "./enrichers/view-scene.mjs";
 import { enrichActivateImage } from "./enrichers/activate-image.mjs";
 import { enrichActivatePage } from "./enrichers/activate-page.mjs";
 import { enrichActivateItem } from "./enrichers/activate-item.mjs";
+import { enrichPlayPlaylist } from "./enrichers/play-playlist.mjs";
 import { registerSceneHandlers } from "./handlers/scene-handlers.mjs";
 import { registerImageHandler } from "./handlers/image-handler.mjs";
 import { registerPageHandler } from "./handlers/page-handler.mjs";
 import { registerItemHandler } from "./handlers/item-handler.mjs";
+import { registerPlaylistHandler } from "./handlers/playlist-handler.mjs";
 
 Hooks.once("init", () => {
   console.log("Journal Shortcuts | Initializing module");
@@ -41,7 +43,7 @@ Hooks.once("init", () => {
 
   game.settings.register(MODULE_ID, "usageHelp", {
     name: "How to Use Journal Shortcuts",
-    hint: "Type these prefixes in any journal entry: @ActivateScene[SceneName]{Label} — GM activates a scene. @ViewScene[SceneName]{Label} — view a scene without activating. @ActivateImage[UUID]{Label} — share an image with players. @ActivatePage[UUID]{Label} — share a journal page with players. @ActivateItem[UUID]{Label} — share an item with players. Add |permission before the [ to set access level, e.g. @ActivateImage|observer[UUID]{Label}.",
+    hint: "Type these prefixes in any journal entry: @ActivateScene[SceneName]{Label} — GM activates a scene. @ViewScene[SceneName]{Label} — view a scene without activating. @ActivateImage[UUID]{Label} — share an image with players. @ActivatePage[UUID]{Label} — share a journal page with players. @ActivateItem[UUID]{Label} — share an item with players. @PlayPlaylist[Playlist]{Label} — GM (re)starts a playlist for all players; omit [Playlist] to use the active scene's playlist. Add |permission before the [ to set access level, e.g. @ActivateImage|observer[UUID]{Label}.",
     scope: "world",
     config: true,
     requiresReload: false,
@@ -76,6 +78,11 @@ Hooks.once("init", () => {
       // @ActivateItem[uuid]{Label} or @ActivateItem|permission[uuid]{Label}
       pattern: new RegExp(`@ActivateItem(?:\\|([a-zA-Z]+))?\\[([^\\]]+)\\]\\{([^}]+)\\}`, "g"),
       enricher: enrichActivateItem
+    },
+    {
+      // @PlayPlaylist[Playlist]{Label}  — target optional (omit -> active scene's playlist)
+      pattern: new RegExp(`@(PlayPlaylist)(?:\\[([^\\]]+)\\])?(?:\\{([^}]+)\\})?`, "g"),
+      enricher: enrichPlayPlaylist
     }
   ]);
 
@@ -85,6 +92,7 @@ Hooks.once("init", () => {
   registerImageHandler();
   registerPageHandler();
   registerItemHandler();
+  registerPlaylistHandler();
 });
 
 Hooks.once("ready", () => {
