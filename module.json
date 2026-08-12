@@ -9,14 +9,25 @@
       "flags": {}
     }
   ],
-  "version": "1.3.0",
+  "version": "1.5.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
   },
+  "relationships": {
+    "recommends": [
+      {
+        "id": "scene-transitions",
+        "type": "module",
+        "reason": "Enables @ActivateScene|scene-transitions[Scene]{Label}, which activates a scene behind a transition. Without it, those links activate the scene normally.",
+        "manifest": "https://github.com/p4535992/foundryvtt-scene-transitions/releases/latest/download/module.json",
+        "compatibility": {}
+      }
+    ]
+  },
   "url": "https://github.com/martin1english/journal-shortcuts",
   "manifest": "https://raw.githubusercontent.com/martin1english/journal-shortcuts/main/module.json",
-  "download": "https://github.com/martin1english/journal-shortcuts/releases/download/v1.3.0/journal-shortcuts-v1.3.0.zip",
+  "download": "https://github.com/martin1english/journal-shortcuts/releases/download/v1.5.0/journal-shortcuts-v1.5.0.zip",
   "esmodules": [
     "modules/journal-shortcuts.mjs"
   ],

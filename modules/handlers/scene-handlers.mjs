@@ -1,4 +1,5 @@
 import { MODULE_ID, CSS_CLASSES } from "../lib/constants.mjs";
+import { SCENE_PROVIDERS } from "../lib/scene-providers.mjs";
 
 /**
  * Register click handlers for @ActivateScene and @ViewScene links.
@@ -42,7 +43,10 @@ async function _onClickActivateScene(event, anchor) {
   if ((!canMod && canView) || (canMod && event.ctrlKey)) {
     scene.view();
   } else if (canMod) {
-    scene.activate();
+    // A provider named on the link may take over the activation, e.g. to run it
+    // behind a Scene Transitions curtain. If none does, activate normally.
+    const provider = anchor.dataset.via ? SCENE_PROVIDERS[anchor.dataset.via] : null;
+    if (!provider?.(scene)) scene.activate();
   } else {
     // Non-GM, playersViewScenes is false: do nothing
     return;

@@ -1,5 +1,5 @@
 import { MODULE_ID } from "./lib/constants.mjs";
-import { enrichActivateScene } from "./enrichers/activate-scene.mjs";
+import { enrichActivateScene, enrichActivateSceneVia } from "./enrichers/activate-scene.mjs";
 import { enrichViewScene } from "./enrichers/view-scene.mjs";
 import { enrichActivateImage } from "./enrichers/activate-image.mjs";
 import { enrichActivatePage } from "./enrichers/activate-page.mjs";
@@ -43,7 +43,7 @@ Hooks.once("init", () => {
 
   game.settings.register(MODULE_ID, "usageHelp", {
     name: "How to Use Journal Shortcuts",
-    hint: "Type these prefixes in any journal entry: @ActivateScene[SceneName]{Label} — GM activates a scene. @ViewScene[SceneName]{Label} — view a scene without activating. @ActivateImage[UUID]{Label} — share an image with players. @ActivatePage[UUID]{Label} — share a journal page with players. @ActivateItem[UUID]{Label} — share an item with players. @PlayPlaylist[Playlist]{Label} — GM (re)starts a playlist for all players; omit [Playlist] to use the active scene's playlist. Add |permission before the [ to set access level, e.g. @ActivateImage|observer[UUID]{Label}.",
+    hint: "Type these prefixes in any journal entry: @ActivateScene[SceneName]{Label} — GM activates a scene. @ViewScene[SceneName]{Label} — view a scene without activating. @ActivateImage[UUID]{Label} — share an image with players. @ActivatePage[UUID]{Label} — share a journal page with players. @ActivateItem[UUID]{Label} — share an item with players. @PlayPlaylist[Playlist]{Label} — GM (re)starts a playlist for all players; omit [Playlist] to use the active scene's playlist. Add |permission before the [ to set access level, e.g. @ActivateImage|observer[UUID]{Label}. @ActivateScene|scene-transitions[SceneName]{Label} — activates the scene behind a Scene Transitions curtain, using the transition set up on that scene; falls back to a normal activation if the scene has no transition or the module is inactive.",
     scope: "world",
     config: true,
     requiresReload: false,
@@ -58,6 +58,13 @@ Hooks.once("init", () => {
       // @ActivateScene[sceneId]{Label}
       pattern: new RegExp(`@(ActivateScene)\\[([^\\]]+)\\](?:{([^}]+)})?`, "g"),
       enricher: enrichActivateScene
+    },
+    {
+      // @ActivateScene|<module-id>[sceneId]{Label} — hand the activation to
+      // another module. Mutually exclusive with the pattern above: that one
+      // requires "[" immediately after the name, this one requires "|".
+      pattern: new RegExp(`@ActivateScene\\|([a-zA-Z0-9_-]+)\\[([^\\]]+)\\](?:\\{([^}]+)\\})?`, "g"),
+      enricher: enrichActivateSceneVia
     },
     {
       // @ViewScene[sceneId]{Label}

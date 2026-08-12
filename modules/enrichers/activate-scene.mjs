@@ -8,9 +8,30 @@ import { buildLink } from "../lib/utils.mjs";
  * match[3] = display label (optional)
  */
 export async function enrichActivateScene(match, options) {
-  const target = match[2];
-  const label = match[3];
+  return _buildSceneLink(match[2], match[3], "");
+}
 
+/**
+ * Enricher for @ActivateScene|<module-id>[sceneId]{Label}
+ * match[1] = provider module id (e.g. "scene-transitions")
+ * match[2] = UUID path, scene ID, or scene name
+ * match[3] = display label (optional)
+ *
+ * Target and label sit at the same group numbers as the bare form, because that
+ * pattern captures the literal enricher name in group 1.
+ */
+export async function enrichActivateSceneVia(match, options) {
+  return _buildSceneLink(match[2], match[3], match[1]);
+}
+
+/**
+ * Build an @ActivateScene link.
+ * @param {string} target - UUID path, scene ID, or scene name
+ * @param {string|undefined} label - display label
+ * @param {string} via - provider module id, or "" for a plain activation
+ * @returns {Node}
+ */
+async function _buildSceneLink(target, label, via) {
   // Try fromUuid first (handles full UUID paths like "Scene.abc123"),
   // then fall back to collection lookup by ID or name for backwards compat
   let doc = null;
@@ -27,7 +48,7 @@ export async function enrichActivateScene(match, options) {
       cssClass: CSS_CLASSES.activateScene,
       icon: "fas fa-unlink",
       label: label || target,
-      dataset: { type: "ActivateScene", entity: "Scene", id: "" },
+      dataset: { type: "ActivateScene", entity: "Scene", id: "", via },
       broken: true
     });
   }
@@ -43,6 +64,6 @@ export async function enrichActivateScene(match, options) {
     cssClass: CSS_CLASSES.activateScene,
     icon: CONFIG.Scene.sidebarIcon,
     label: label || doc.name,
-    dataset: { type: "ActivateScene", entity: "Scene", id: doc.id }
+    dataset: { type: "ActivateScene", entity: "Scene", id: doc.id, via }
   });
 }

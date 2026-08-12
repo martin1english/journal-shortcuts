@@ -15,6 +15,8 @@ Type these prefixes directly into a journal entry's text editor:
 | `@ActivateImage` | Show an image to all players | `@ActivateImage[JournalEntry.xxx.JournalEntryPage.yyy]{Show Map}` |
 | `@ActivatePage` | Show a journal page to all players | `@ActivatePage[JournalEntry.xxx.JournalEntryPage.yyy]{Read Note}` |
 | `@ActivateItem` | Show an item to all players | `@ActivateItem[Item.abc123]{Magic Sword}` |
+| `@PlayPlaylist` | Restart a playlist for all players (GM) | `@PlayPlaylist[Tavern Music]{Start Music}` |
+| `@ActivateScene\|scene-transitions` | Activate a scene behind a transition (GM) | `@ActivateScene\|scene-transitions[Scene.abc123]{Go to Tavern}` |
 
 ## How to Use
 
@@ -36,6 +38,7 @@ Replace `@UUID` with the Journal Shortcuts prefix you want:
 | Show an image | `@ActivateImage` | 
 | Show a page | `@ActivatePage` | 
 | Show an item | `@ActivateItem` |
+| Start a playlist | `@PlayPlaylist` |
 
 example
 @ActivateScene[Scene.8S8Gbw6ZmeGMNqLE]{El Profundo Ranch Exterior}
@@ -69,6 +72,43 @@ example
 | `none` | No persistent access |
 
 If no flag is specified, no ownership changes are made. For journal pages, permissions are set on the **JournalEntryPage only** — the GM must ensure the parent JournalEntry has at least Limited access for players to see its pages. For items, permissions are set on the **Item document**.
+
+#### Starting a Playlist
+
+`@PlayPlaylist` restarts a playlist from the beginning for everyone connected. Playlists are synced by Foundry, so the restart reaches players automatically.
+
+```
+@PlayPlaylist[Tavern Music]{Start the music}
+@PlayPlaylist{Start scene music}
+```
+
+Omit the target to use the **active scene's** linked playlist, which keeps the link reusable across scenes.
+
+This exists because scene-activation autoplay is consumed by whoever activates the scene — usually the GM, before the players have logged in, leaving them in silence. Clicking the link once everyone has arrived starts the music for the whole table.
+
+GM only. A non-GM click shows an info notification and does nothing.
+
+#### Activating a Scene Behind a Transition
+
+If you have the [Scene Transitions](https://github.com/p4535992/foundryvtt-scene-transitions) module installed, `@ActivateScene` can hand the scene change over to it, so players see the curtain go up before the scene changes underneath.
+
+Set the transition up on the scene first: right-click the scene in the sidebar, choose **Create Transition**, add your text, image or video, and save. Then name the module in the link:
+
+```
+@ActivateScene|scene-transitions[Scene.8S8Gbw6ZmeGMNqLE]{El Profundo Ranch Exterior}
+```
+
+The argument is the module's id, not a keyword — so the same slot can name other modules as support for them is added.
+
+Clicking activates the scene exactly as `@ActivateScene` does, except that Scene Transitions puts its curtain up on every connected client first and performs the activation behind it. Ctrl+click still views the scene with no transition.
+
+It falls back to a plain activation — the same behaviour as a bare `@ActivateScene` link — when any of these is true:
+
+- the scene has no transition set up on it
+- Scene Transitions is not installed or not active
+- the module id named is not one Journal Shortcuts knows about
+
+So the link is always safe to click, and a scene link never stops working because of the extra argument.
 
 ### Step 3 — Save
 
